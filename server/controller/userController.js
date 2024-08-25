@@ -1,7 +1,5 @@
 const User = require('../models/user');
 var bcrypt = require('bcryptjs');
-var salt = bcrypt.genSaltSync(10);
-var hash = bcrypt.hashSync("B4c0/\/", salt);
 const { validationResult } = require('express-validator');
 
 const signupUser = async (req, res) => {
@@ -10,6 +8,7 @@ const signupUser = async (req, res) => {
 
     try {
         const user = await User.findOne({ email: email });
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -27,8 +26,9 @@ const signupUser = async (req, res) => {
                 }
             )
         } else {
-            await User.create({ name, email, password });
+            const newUser = await User.create({ name, email, password: hashedPassword });
             res.status(200).send({ message: 'User added successfully' });
+            console.log(newUser);
         }
     } catch (error) {
         res.status(500).send({ message: error.message });
