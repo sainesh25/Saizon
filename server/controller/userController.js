@@ -1,6 +1,7 @@
 const User = require('../models/user');
 var bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
+const JWT = require('jsonwebtoken');
 
 const signupUser = async (req, res) => {
     //  console.log(req.headers);
@@ -8,7 +9,7 @@ const signupUser = async (req, res) => {
 
     try {
         const user = await User.findOne({ email: email });
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const isMatch = await bcrypt.hash(password, 10);
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -26,9 +27,12 @@ const signupUser = async (req, res) => {
                 }
             )
         } else {
-            const newUser = await User.create({ name, email, password: hashedPassword });
+            const newUser = await User.create({ name, email, password: isMatch });
             res.status(200).send({ message: 'User added successfully' });
-            console.log(newUser);
+            // console.log(newUser);
+            const token = JWT.sign({ email, name }, process.env.JWT_SECRET_KEY);
+            // console.log(token);
+
         }
     } catch (error) {
         res.status(500).send({ message: error.message });

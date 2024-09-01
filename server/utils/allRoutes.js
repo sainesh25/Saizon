@@ -1,9 +1,9 @@
-const testRoutes = require('../routes/testRoute');
 const userRoutes = require('../routes/signup');
+const loginRoutes = require('../routes/login');
 
 const allRoutes = (app) => {
-    app.use(testRoutes);
     app.use(userRoutes);
+    app.use(loginRoutes);
     
 }
 
