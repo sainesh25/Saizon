@@ -1,10 +1,12 @@
-const { body } = require('express-validator');
-const signup = require('../controller/userController');
-const userRouter = require('express').Router();
+import { body } from 'express-validator';
+import signup from '../controller/userController.js';
+import express from 'express';
+
+const userRouter = express.Router();
 
 userRouter.post('/signup',
     body('email').isEmail().withMessage('Email is invalid'),
     body('password').isLength({ min: 8 }).withMessage('Password must be atleast 8 characters'),
     signup.signupUser);
 
-module.exports = userRouter;
+export default userRouter;

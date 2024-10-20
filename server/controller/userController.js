@@ -1,7 +1,7 @@
-const User = require('../models/user');
-var bcrypt = require('bcryptjs');
-const { validationResult } = require('express-validator');
-const JWT = require('jsonwebtoken');
+import User from '../models/user.js';
+import bcrypt from 'bcryptjs';
+import { validationResult } from 'express-validator';
+import JWT from 'jsonwebtoken';
 
 const signupUser = async (req, res) => {
     //  console.log(req.headers);
@@ -39,4 +39,4 @@ const signupUser = async (req, res) => {
     }
 };
 
-module.exports = { signupUser }
+export default { signupUser }

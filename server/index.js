@@ -1,8 +1,9 @@
-require('dotenv').config(); // Load environment variables
+import 'dotenv/config' 
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import allRoutes from '../server/utils/allRoutes.js';
 
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors')
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -12,7 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // console.log(process.env.PORT);
-const allRoutes = require('../server/utils/allRoutes');
 allRoutes(app);
 
 // console.log('MONGO_URI:', process.env.MONGO_URI);

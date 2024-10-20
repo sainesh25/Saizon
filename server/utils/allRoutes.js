@@ -1,5 +1,6 @@
-const userRoutes = require('../routes/signup');
-const loginRoutes = require('../routes/login');
+
+import userRoutes from '../routes/signup.js';
+import loginRoutes from '../routes/login.js';
 
 const allRoutes = (app) => {
     app.use(userRoutes);
@@ -7,4 +8,4 @@ const allRoutes = (app) => {
     
 }
 
-module.exports = allRoutes;
+export default allRoutes;

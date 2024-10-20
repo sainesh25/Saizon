@@ -5,10 +5,11 @@ import { register } from "../service/api";
 import * as Yup from 'yup';
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Register: React.FC = () => {
   // console.log('hello');
-
+  const router = useRouter();
   const validationSchema = Yup.object({
     name: Yup.string().required('Name is required'),
     email: Yup.string().email('Invalid Email').required('Email is required'),
@@ -29,6 +30,7 @@ const Register: React.FC = () => {
         if (response?.status === 200) {
           toast.success('Registration Successfull');
           resetForm();
+          router.push('/login');
         }
       }
       catch (err) {

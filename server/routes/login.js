@@ -1,9 +1,9 @@
-const { body } = require('express-validator');
-const login = require('../controller/loginController');
-const loginRouter = require('express').Router();
-
+import { body } from 'express-validator';
+import login from '../controller/loginController.js';
+import express from 'express'
+const loginRouter = express.Router();
 loginRouter.post('/login',
     body('email').isEmail().withMessage('Email is invalid'),
     login.loginUser);
 
-module.exports = loginRouter;
+export default loginRouter;
