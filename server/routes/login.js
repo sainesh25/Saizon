@@ -5,5 +5,6 @@ const loginRouter = express.Router();
 loginRouter.post('/login',
     body('email').isEmail().withMessage('Email is invalid'),
     login.loginUser);
+    
 
 export default loginRouter;
