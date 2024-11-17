@@ -16,14 +16,21 @@ const getAllProduct = async (req, res) => {
 
 const addProduct = async (req, res) => {
     try {
-        const data = await Product.create({...req.body});
-        res.send({
-            status: 200,
-            message: 'Product Added Successfully',
-            data
-        })
-        console.log('hello in add product');
-        
+        const data = await Product.create({ ...req.body });
+        if (await Product.findOne({ name : data.name })){
+            res.send({
+                message: 'Product Already exists',
+            })
+        } else {
+
+            res.send({
+                status: 200,
+                message: 'Product Added Successfully',
+                data
+            })
+        }
+        // console.log('hello in add product');
+
     } catch (err) {
         console.log(err);
     }
