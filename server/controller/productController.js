@@ -49,7 +49,7 @@ const deleteProduct = async (req, res) => {
             res.status(200).json({
                 message: 'Product Deleted Successfully',
             })
-            console.log(idFromDb);
+            // console.log(idFromDb);
         }
 
     } catch (err) {

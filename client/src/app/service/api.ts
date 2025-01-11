@@ -27,7 +27,18 @@ const register = async (data: Object) => {
         console.log(err);
     }
 }
+
+const getProducts = async() =>{
+    try{
+        const res = await axios.get(`${domain}${constant.GET_PRODUCTS}`);
+        return res;
+    } catch(err){
+        console.log(err);
+    }
+}
+
 export {
     login,
-    register
+    register,
+    getProducts,
 }
